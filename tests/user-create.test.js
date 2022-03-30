@@ -6,7 +6,7 @@ describe('Test without jwt', () => {
 
     expect(res.statusCode).toEqual(500);
   });
-})
+});
 
 describe('Test with jwt', () => {
   let jwt = '';
