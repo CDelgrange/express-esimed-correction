@@ -23,7 +23,8 @@ describe('Test with jwt', () => {
   });
 
   test('POST /users => success', async () => {
-    const res = await request(apiUrl)
+    // Create an user
+    let res = await request(apiUrl)
       .post('/users')
       .set('Authorization', `Bearer ${jwt}`)
       .send({
@@ -33,6 +34,21 @@ describe('Test with jwt', () => {
       });
 
     expect(res.statusCode).toEqual(201);
+
+    // Retrieve the created user
+    res = await request(apiUrl)
+      .get('/users/Blablabla')
+      .set('Authorization', `Bearer ${jwt}`);
+
+    expect(res.statusCode).toEqual(200);
+
+    // Delete it for cleaning purpose
+    const userId = res.body.id;
+    res = await request(apiUrl)
+      .delete(`/users/${userId}`)
+      .set('Authorization', `Bearer ${jwt}`);
+
+    expect(res.statusCode).toEqual(204);
   });
 
   test('POST /users => without "lastName" should fail', async () => {

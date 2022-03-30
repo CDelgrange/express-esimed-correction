@@ -16,7 +16,7 @@ router.post(
     const { firstName, password } = req.body;
 
     const user = userRepository.getUserByFirstName(firstName);
-    if (!user || !passwordsAreEqual(password, user.password)) {
+    if (!user || !(user && passwordsAreEqual(password, user.password))) {
       res.status(401).send('Unauthorized');
 
       return;

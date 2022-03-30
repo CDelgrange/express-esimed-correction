@@ -49,4 +49,4 @@ describe('Failed login', () => {
     expect(res.statusCode).toEqual(401);
     expect(res.text).toEqual('Unauthorized');
   });
-})
+});

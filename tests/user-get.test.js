@@ -14,6 +14,8 @@ test('GET /users with jwt', async () => {
       password: 'password',
     });
 
+  expect(res.statusCode).toEqual(200);
+
   const jwt = res.body.token;
 
   res = await request(apiUrl)
